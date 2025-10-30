@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>温馨提示</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #fffafc;
+    font-family: "微软雅黑", sans-serif;
+  }
+
+  .tip-box {
+    position: absolute;
+    padding: 20px 35px;
+    border-radius: 20px;
+    font-size: 22px;
+    text-align: center;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.15);
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+    transition: opacity 1.2s ease, transform 3s ease-out;
+    word-wrap: break-word;
+    color: #333;
+  }
+
+  .tip-box.show {
+    opacity: 1;
+    transform: translateY(-30px) scale(1);
+  }
+</style>
+</head>
+<body>
+
+<script>
+const tips = [
+  "多喝水哦~💧", "保持微笑呀😊", "每天都要元气满满💪",
+  "记得吃水果🍎", "保持好心情💕", "好好爱自己🌷",
+  "我想你了💌", "梦想成真✨", "顺顺利利🍀", "早点休息😴",
+  "别熬夜啦🌙", "天冷了，多穿衣服🧣", "今天也要开心呀💖",
+  "相信自己，你很棒🌟", "笑一笑，烦恼全跑掉😄"
+];
+
+const bgColors = [
+  "lightpink", "skyblue", "lavender", "lightgreen",
+  "lightyellow", "plum", "aquamarine", "mistyrose",
+  "honeydew", "oldlace", "coral", "bisque"
+];
+
+function createTipBox() {
+  const tipDiv = document.createElement("div");
+  tipDiv.className = "tip-box";
+  tipDiv.textContent = tips[Math.floor(Math.random() * tips.length)];
+  tipDiv.style.backgroundColor = bgColors[Math.floor(Math.random() * bgColors.length)];
+
+  // 随机位置
+  const maxW = window.innerWidth - 260;
+  const maxH = window.innerHeight - 130;
+  tipDiv.style.left = Math.random() * maxW + "px";
+  tipDiv.style.top = Math.random() * maxH + "px";
+
+  document.body.appendChild(tipDiv);
+
+  // 显示动画
+  setTimeout(() => tipDiv.classList.add("show"), 50);
+
+  // 5秒后淡出
+  setTimeout(() => {
+    tipDiv.style.opacity = "0";
+    setTimeout(() => tipDiv.remove(), 1200);
+  }, 5000);
+}
+
+// 弹出更快（0.1秒一个）
+setInterval(createTipBox, 100);
+</script>
+
+</body>
+</html>
